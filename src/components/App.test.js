@@ -1,9 +1,22 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import App from './App';
+import Modal from './Modal'
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('render', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallow(<App/>);
+  });
+
+  it('should render without error', () => {
+    const component = wrapper.find('.App');
+    expect(component.length).toBe(1)
+  });
+
+  it('should render a Modal component', () => {
+    const component = wrapper.find(Modal);
+    expect(component.length).toBe(1)
+  });
 });
