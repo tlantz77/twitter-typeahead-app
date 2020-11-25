@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+
+.modal-wrapper {
+  top: 5%;
+  width: 700px;
+  height: 400px;
+  background-color: rgb(73, 73, 184);
+  border-radius: 16px;
+  z-index: 0;
+}
