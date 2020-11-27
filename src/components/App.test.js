@@ -12,11 +12,11 @@ describe('render', () => {
 
   it('should render without error', () => {
     const component = wrapper.find('.App');
-    expect(component.length).toBe(1)
+    expect(component.length).toBe(1);
   });
 
   it('should render a Modal component', () => {
     const component = wrapper.find(Modal);
-    expect(component.length).toBe(1)
+    expect(component.length).toBe(1);
   });
 });
