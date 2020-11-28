@@ -9,12 +9,15 @@ let getShallow = () => {
   return component;
 };
 
-describe('render', () => {
-  beforeEach(() => {
-    component = null;
-    props = {};
-  });
+beforeEach(() => {
+  component = null;
+  props = { 
+    tweetText: '',
+    currentWord: ''
+  };
+});
 
+describe('render', () => {
   it('should render without error', () => {
     expect(getShallow().find('.modal.wrapper').length).toEqual(1);
   });
@@ -29,5 +32,17 @@ describe('render', () => {
 
   it('should render a submit button', () => {
     expect(getShallow().find('.util.submit-button').length).toEqual(1);
+  });
+});
+
+describe('state', () => {
+  it('should instantiate with no text', () => {
+    let instance = getShallow().instance();
+    expect(instance.state.tweetText).toEqual('');   
+  });
+
+  it('should instantiate with no current word', () => {
+    let instance = getShallow().instance();
+    expect(instance.state.currentWord).toEqual('');   
   });
 });

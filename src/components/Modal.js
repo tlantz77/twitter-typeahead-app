@@ -1,16 +1,35 @@
 import React, { Component } from 'react';
+import { getCurrentWord } from '../utilities';
 import '../styles.css';
 
 class Modal extends Component {
-  state = { tweetText: '' };
+  constructor(props) {
+    super(props);
+    this.state = {
+      tweetText: this.props.tweetText,
+      currentWord: this.props.currentWord
+    }
+  }
 
   componentDidUpdate() {
-    console.log(this.state.tweetText);
+    console.log('Text:' + this.state.tweetText);
+    console.log('Curent Word:' + this.state.currentWord);
   }
 
   onFormSubmit = event => {
     event.preventDefault();
     console.log('You tweeted: ' + this.state.tweetText);
+    this.setState({tweetText: ''});
+  }
+
+  onTextChange = event => {
+    const textString = event.target.value;
+    if (textString) {
+      this.setState({
+        tweetText: textString,
+        currentWord: getCurrentWord(textString) 
+      });
+    }
   }
 
   textInput() {
@@ -22,7 +41,7 @@ class Modal extends Component {
         cols='80'
         placeholder="What's happening?"
         value={this.state.tweetText}
-        onChange={e => this.setState({ tweetText: e.target.value })}
+        onChange={e => {this.onTextChange(e)}}
       />
     )
   }
