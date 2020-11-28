@@ -13,7 +13,7 @@ beforeEach(() => {
   component = null;
   props = { 
     tweetText: '',
-    currentWord: ''
+    mentions: []
   };
 });
 
@@ -41,8 +41,8 @@ describe('state', () => {
     expect(instance.state.tweetText).toEqual('');   
   });
 
-  it('should instantiate with no current word', () => {
+  it('should instantiate with no mentions', () => {
     let instance = getShallow().instance();
-    expect(instance.state.currentWord).toEqual('');   
+    expect(instance.state.mentions.length).toEqual(0);   
   });
 });

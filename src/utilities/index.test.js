@@ -20,37 +20,37 @@ describe('getCurrentWord', () => {
 describe('isValidMention', () => {
   describe('Valid matches', () => {
     it('should return true for string "@Aa"', () => {
-      expect(isValidMention('@Aa')).toEqual(true);
+      expect(isValidMention('@Aa')).toBeTruthy;
     });
   
     it('should return true for string "@2pac"', () => {
-      expect(isValidMention('@2pac')).toEqual(true);
+      expect(isValidMention('@2pac')).toBeTruthy;
     });
   
     it('should return true for string "@Twitter"', () => {
-      expect(isValidMention('@Twitter')).toEqual(true);
+      expect(isValidMention('@Twitter')).toBeTruthy;
     });
 
     it('should return true for string "@Sprout384729666', () => {
-      expect(isValidMention('@Sprout384729666')).toEqual(true);
+      expect(isValidMention('@Sprout384729666')).toBeTruthy;
     });
   });
 
   describe('Invalid matches', () => {
     it('should return false for string "@A"', () => {
-      expect(isValidMention('@A')).toEqual(false);
+      expect(isValidMention('@A')).toBeFalsy;
     });
   
     it('should return false for string "2pac"', () => {
-      expect(isValidMention('2pac')).toEqual(false);
+      expect(isValidMention('2pac')).toBeFalsy;
     });
   
     it('should return false for string "@@Twitter"', () => {
-      expect(isValidMention('@@Twitter')).toEqual(false);
+      expect(isValidMention('@@Twitter')).toBeFalsy;
     });
 
     it('should return false for string "@Sp^&)#$(#"', () => {
-      expect(isValidMention('@Sp^&)#$(#')).toEqual(false);
+      expect(isValidMention('@Sp^&)#$(#')).toBeFalsy;
     });
   });
 

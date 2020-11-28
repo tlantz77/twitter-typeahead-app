@@ -1,34 +1,38 @@
 import React, { Component } from 'react';
-import { getCurrentWord } from '../utilities';
+import { getCurrentWord, isValidMention } from '../utilities';
 import '../styles.css';
 
 class Modal extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tweetText: this.props.tweetText,
-      currentWord: this.props.currentWord
-    }
+  state = {
+    tweetText: this.props.tweetText || '',
+    activeMention: this.props.mentions || ''
   }
 
   componentDidUpdate() {
-    console.log('Text:' + this.state.tweetText);
-    console.log('Curent Word:' + this.state.currentWord);
+    // console.log('Text:' + this.state.tweetText);
+    console.log('activeMention: ', this.state.activeMention);
   }
 
   onFormSubmit = event => {
     event.preventDefault();
     console.log('You tweeted: ' + this.state.tweetText);
-    this.setState({tweetText: ''});
+    this.setState({
+      tweetText: '',
+      activeMention: ''
+    });
   }
 
   onTextChange = event => {
     const textString = event.target.value;
+    this.setState({ tweetText: textString });
+
     if (textString) {
-      this.setState({
-        tweetText: textString,
-        currentWord: getCurrentWord(textString) 
-      });
+      const currentWord = getCurrentWord(textString);
+      if(isValidMention(currentWord)) {
+        this.setState({ activeMention: currentWord })
+      } else {
+        this.setState({ activeMention: '' })
+      }
     }
   }
 
