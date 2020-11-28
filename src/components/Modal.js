@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { getCurrentWord, isValidMention } from '../utilities';
+import { getMentionByCursorPosition } from '../utilities';
 import '../styles.css';
 
 class Modal extends Component {
   state = {
     tweetText: this.props.tweetText || '',
-    activeMention: this.props.activeMention|| ''
+    activeMention: this.props.activeMention || ''
   }
 
   componentDidUpdate() {
     // console.log('Text:' + this.state.tweetText);
-    // console.log('activeMention: ', this.state.activeMention);
+    console.log('activeMention: ', this.state.activeMention);
   }
 
   onFormSubmit = event => {
@@ -24,13 +24,13 @@ class Modal extends Component {
 
   onTextChange = event => {
     const textString = event.target.value;
-    console.log(event.target.selectionStart);
     this.setState({ tweetText: textString });
 
     if (textString) {
-      const currentWord = getCurrentWord(textString);
-      if(isValidMention(currentWord)) {
-        this.setState({ activeMention: currentWord })
+      const cursorPosition = event.target.selectionStart;
+      const mention = getMentionByCursorPosition(textString, cursorPosition);
+      if (mention) {
+        this.setState({ activeMention: mention })
       } else {
         this.setState({ activeMention: '' })
       }
@@ -53,7 +53,7 @@ class Modal extends Component {
 
   searchResults() {
     return (
-      <div>
+      <div className='search-results-wrapper'>
         Search results to go here!
       </div>
     )

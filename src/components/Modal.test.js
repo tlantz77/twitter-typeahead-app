@@ -13,7 +13,7 @@ beforeEach(() => {
   component = null;
   props = { 
     tweetText: '',
-    mentions: []
+    activeMention: ''
   };
 });
 
@@ -32,6 +32,18 @@ describe('render', () => {
 
   it('should render a submit button', () => {
     expect(getShallow().find('.util.submit-button').length).toEqual(1);
+  });
+
+  it('should not render search results if no active mention', () => {
+    expect(getShallow().find('.search-results-wrapper').length).toEqual(0);
+  });
+
+  it('should render search results if there is a currently active mention', () => {
+    props = {
+      tweetText: 'Hi I am @ElBarto',
+      activeMention: '@ElBarto'
+    };
+    expect(getShallow().find('.search-results-wrapper').length).toEqual(1);
   });
 });
 

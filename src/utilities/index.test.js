@@ -1,21 +1,4 @@
-import { getCurrentWord, getMentionByCursorPosition, isValidMention } from './';
-
-describe('getCurrentWord', () => { 
-  it('should return the text after the last space in string', () => {
-    const text = 'I will have the last word';
-    expect(getCurrentWord(text)).toEqual('word');
-  });
-
-  it('should return empty string if no text', () => {
-    const text = '';
-    expect(getCurrentWord(text)).toEqual('');
-  });
-
-  it('should return last word if trailing space', () => {
-    const text = 'Got some trailing space ';
-    expect(getCurrentWord(text)).toEqual('space');
-  });
-});
+import { getMentionByCursorPosition, isValidMention } from './';
 
 describe('getMentionByCursorPosition', () => {
   let text = 'Hey @Homer, stop strangling @Bart!'
@@ -40,6 +23,7 @@ describe('getMentionByCursorPosition', () => {
     expect(getMentionByCursorPosition(text, 6)).toEqual(null);
   });
 });
+
 
 describe('isValidMention', () => {
   describe('Valid matches', () => {

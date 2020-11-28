@@ -1,10 +1,5 @@
 const MENTION_REGEX = /@[A-z0-9]{2,}/g;
 
-export const getCurrentWord = (text) => {
-  const textArray = text.trim().split(' ');
-  return textArray[textArray.length - 1];
-}
-
 export const getMentionByCursorPosition = (text, cursorPosition) => {
   const mentions = text.match(MENTION_REGEX);
   if (mentions) {
