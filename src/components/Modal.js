@@ -5,12 +5,12 @@ import '../styles.css';
 class Modal extends Component {
   state = {
     tweetText: this.props.tweetText || '',
-    activeMention: this.props.mentions || ''
+    activeMention: this.props.activeMention|| ''
   }
 
   componentDidUpdate() {
     // console.log('Text:' + this.state.tweetText);
-    console.log('activeMention: ', this.state.activeMention);
+    // console.log('activeMention: ', this.state.activeMention);
   }
 
   onFormSubmit = event => {
@@ -24,6 +24,7 @@ class Modal extends Component {
 
   onTextChange = event => {
     const textString = event.target.value;
+    console.log(event.target.selectionStart);
     this.setState({ tweetText: textString });
 
     if (textString) {
@@ -49,6 +50,14 @@ class Modal extends Component {
       />
     )
   }
+
+  searchResults() {
+    return (
+      <div>
+        Search results to go here!
+      </div>
+    )
+  }
   
   render () {
     return ( 
@@ -59,6 +68,7 @@ class Modal extends Component {
             <button className='util submit-button'>Tweet</button>
           </div>
         </form>
+        {this.state.activeMention && this.searchResults()}
       </div> 
     );
   }

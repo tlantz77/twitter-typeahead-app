@@ -41,8 +41,8 @@ describe('state', () => {
     expect(instance.state.tweetText).toEqual('');   
   });
 
-  it('should instantiate with no mentions', () => {
+  it('should instantiate with no active mention', () => {
     let instance = getShallow().instance();
-    expect(instance.state.mentions.length).toEqual(0);   
+    expect(instance.state.activeMention).toEqual('');   
   });
 });
