@@ -1,43 +1,43 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { getMentionByCursorPosition } from '../utilities';
 import '../styles.css';
 
-class Modal extends Component {
-  state = {
-    tweetText: this.props.tweetText || '',
-    activeMention: this.props.activeMention || ''
-  }
+const Modal = () => {
+  const [text, setText] = React.useState('');
+  const [debouncedText, setDebouncedText] = React.useState(text);
+  const [cursorPosition, setCursorPosition] = React.useState(0);
+  const [activeMention, setActiveMention] = React.useState('');
+  const [searchResults, setSearchResults] = React.useState([]);
 
-  componentDidUpdate() {
-    // console.log('Text:' + this.state.tweetText);
-    console.log('activeMention: ', this.state.activeMention);
-  }
+  React.useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedText(text);
+    }, 1000);
 
-  onFormSubmit = event => {
-    event.preventDefault();
-    console.log('You tweeted: ' + this.state.tweetText);
-    this.setState({
-      tweetText: '',
-      activeMention: ''
-    });
-  }
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [text]);
 
-  onTextChange = event => {
-    const textString = event.target.value;
-    this.setState({ tweetText: textString });
-
-    if (textString) {
-      const cursorPosition = event.target.selectionStart;
-      const mention = getMentionByCursorPosition(textString, cursorPosition);
+  React.useEffect(() => {
+    if (debouncedText) {
+      const mention = getMentionByCursorPosition(debouncedText, cursorPosition);
       if (mention) {
-        this.setState({ activeMention: mention })
+        setActiveMention(mention);
       } else {
-        this.setState({ activeMention: '' })
+        setActiveMention('');
       }
     }
-  }
+  }, [debouncedText]);
 
-  textInput() {
+  const onFormSubmit = event => {
+    event.preventDefault();
+    console.log('You tweeted: ' + text);
+    setText('');
+    setActiveMention('');
+  }
+  
+  const textInput = () => {
     return (
       <textarea
         className='modal text-input'
@@ -45,33 +45,34 @@ class Modal extends Component {
         rows='8'
         cols='80'
         placeholder="What's happening?"
-        value={this.state.tweetText}
-        onChange={e => {this.onTextChange(e)}}
+        value={text}
+        onChange={e => {
+          setText(e.target.value)
+          setCursorPosition(e.target.selectionStart)
+        }}
       />
     )
   }
 
-  searchResults() {
+  const searchResultsWrapper = () => {
     return (
       <div className='search-results-wrapper'>
         Search results to go here!
       </div>
     )
   }
-  
-  render () {
-    return ( 
-      <div className='modal wrapper'>
-        <form onSubmit={this.onFormSubmit}>
-          {this.textInput()}
-          <div className='modal toolbar'>
-            <button className='util submit-button'>Tweet</button>
-          </div>
-        </form>
-        {this.state.activeMention && this.searchResults()}
-      </div> 
-    );
-  }
+
+  return ( 
+    <div className='modal wrapper'>
+      <form onSubmit={e => onFormSubmit(e)}>
+        {textInput()}
+        <div className='modal toolbar'>
+          <button className='util submit-button'>Tweet</button>
+        </div>
+      </form>
+      {activeMention && searchResultsWrapper()}
+    </div> 
+  );
 }
- 
+
 export default Modal;

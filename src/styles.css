@@ -55,7 +55,7 @@ body {
   float: right;
 }
 
-.search-results {
+.search-results-wrapper {
   background-color: white;
   height: 50px;
   width: 200px;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
-import Modal from './Modal'
+import Modal from './Modal';
 
-describe('render', () => {
+describe.only('render', () => {
   let wrapper;
 
   beforeEach(() => {
