@@ -6,18 +6,6 @@ import Toolbar from './Toolbar';
 import TypeaheadDropdown from './TypeaheadDropdown';
 import '../styles.css';
 
-// const tempResults = [
-//   {
-//     id: 1, name: 'Homer Simpson', screenName: '@Homerpalooza', verified: true
-//   },
-//   {
-//     id: 2, name: 'Bart Simpson', screenName: '@ElBarto', verified: false
-//   },
-//   {
-//     id: 3, name: 'Herschel Krustofsky', screenName: '@KrustyTheClown', verified: true
-//   }
-// ]
-
 const Modal = () => {
   const [text, setText] = React.useState('');
   const [debouncedText, setDebouncedText] = React.useState(text);
@@ -38,7 +26,7 @@ const Modal = () => {
 
   React.useEffect(() => {
     if (debouncedText) {
-      const mention = getMentionByCursorPosition(text, cursorPosition);
+      const mention = getMentionByCursorPosition(debouncedText, cursorPosition);
       if (mention && mention !== selectedMention) {
         setMentionToSearch(mention);
       } else {
@@ -59,9 +47,15 @@ const Modal = () => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    console.log('You tweeted: ' + text);
-    setText('');
-    setMentionToSearch('');
+    if (text.length > 280) {
+      alert('Error: You have exceeded the 280 character limit!');
+    } else {
+      alert('Congratulations, you tweeted something!  May the ratio be with you!');
+      setText('');
+      setMentionToSearch(null);
+      setSearchResults(null);
+      localStorage.clear();
+    }
   }
   
   const textInput = () => {

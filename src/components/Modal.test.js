@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Modal from './Modal';
+import Toolbar from './Toolbar';
 import TypeaheadDropdown from './TypeaheadDropdown';
 
 let component, mockSetText, mockSetActiveMention;
@@ -20,11 +21,7 @@ describe('render', () => {
   });
 
   it('should render a toolbar', () => {
-    expect(component.find('.modal.toolbar').length).toEqual(1);
-  });
-
-  it('should render a submit button', () => {
-    expect(component.find('.util.submit-button').length).toEqual(1);
+    expect(component.find(Toolbar).length).toEqual(1);
   });
 
   it('should not render Suggestions if no active mention', () => {

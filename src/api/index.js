@@ -18,6 +18,9 @@ export const processSearchResults = (data) => {
 
 export const getSearchResults = async (mention) => {
   if (isValidMention(mention)) {
+    if (localStorage[mention]) {
+      return JSON.parse(localStorage.getItem(mention));
+    }
     const searchTerm = mention.substring(1);
     const searchPath = `${BASE_URL}/twitter/user/search`;
     const { data } = await axios.get(searchPath, {
@@ -25,8 +28,9 @@ export const getSearchResults = async (mention) => {
         username: searchTerm
       }
     });
-    console.log(data);
-    return processSearchResults(data);
+    const processedSearchResults = processSearchResults(data);
+    localStorage.setItem(mention, JSON.stringify(processedSearchResults));
+    return processedSearchResults;
   } else {
     throw new Error('Not a valid mention.')
   }

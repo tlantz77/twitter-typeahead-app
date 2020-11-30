@@ -8,7 +8,7 @@ const TypeaheadDropdown = ({searchResults, onSelect}) => {
         className={'user-row'}
         onClick={() => onSelect(user.screenName)}
       >
-        <img className='user-icon'></img>
+        <img className='user-icon' src={user.profileImageUrl} ></img>
         <div className='user-info'>
           <div className='user-name'>{user.name}{user.verified && ' *'}</div>
           <div className='user-screen-name'>{user.screenName}</div>
