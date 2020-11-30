@@ -10,7 +10,7 @@ describe('getSearchResults', () => {
     moxios.uninstall();
   });
   
-  it.only('should respond with a list of twitter users if valid mention', async () => {
+  it('should respond with a list of twitter users if valid mention', async () => {
     const mockAxiosResponse = [
       { id: 0, 
         name: 'HomerSimpson',

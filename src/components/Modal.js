@@ -2,6 +2,7 @@ import React from 'react';
 import { getMentionByCursorPosition } from '../utilities';
 import { getSearchResults } from '../api';
 
+import Toolbar from './Toolbar';
 import TypeaheadDropdown from './TypeaheadDropdown';
 import '../styles.css';
 
@@ -67,7 +68,6 @@ const Modal = () => {
     return (
       <textarea
         className='modal text-input'
-        maxLength='280'
         rows='8'
         cols='80'
         placeholder="What's happening?"
@@ -95,9 +95,7 @@ const Modal = () => {
     <div className='modal wrapper'>
       <form onSubmit={e => onFormSubmit(e)}>
         {textInput()}
-        <div className='modal toolbar'>
-          <button className='util submit-button'>Tweet</button>
-        </div>
+        <Toolbar textLength={text.length}/>
       </form>
       {mentionToSearch && searchResults && renderSearchResults()}
     </div> 
