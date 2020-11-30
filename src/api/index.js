@@ -9,9 +9,9 @@ export const processSearchResults = (data) => {
     return {
       id,
       name,
-      screen_name,
+      screenName: `@${screen_name}`,
       verified,
-      profile_image_url
+      profileImageUrl: profile_image_url
     }
   })
 }

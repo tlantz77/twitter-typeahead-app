@@ -6,13 +6,13 @@ import '../styles.css';
 
 const tempResults = [
   {
-    id: 1, name: 'HomerSimpson', screen_name: 'Homey', verified: true
+    id: 1, name: 'HomerSimpson', screenName: '@Homey', verified: true
   },
   {
-    id: 2, name: 'BartSimpson', screen_name: 'ElBarto', verified: false
+    id: 2, name: 'BartSimpson', screenName: '@ElBarto', verified: false
   },
   {
-    id: 3, name: 'BarneyGumble', screen_name: 'BGDawg', verified: true
+    id: 3, name: 'BarneyGumble', screenName: '@BGDawg', verified: true
   }
 ]
 
@@ -76,8 +76,14 @@ const Modal = () => {
     )
   }
 
+  const selectMention = (screenName) => {
+    const updatedText = text.replace(activeMention, screenName);
+    setText(updatedText);
+    setActiveMention('');
+  }
+
   const renderSearchResults = () => {
-    return <TypeaheadDropdown searchResults={searchResults}/>
+    return <TypeaheadDropdown searchResults={searchResults} onSelect={selectMention}/>
   }
 
   return ( 
