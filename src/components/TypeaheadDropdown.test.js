@@ -60,4 +60,5 @@ describe('render user row', () => {
     userRow = getShallow().find('.user-row').at(1);
     expect(userRow.find('.user-name').text()).toEqual('BartSimpson');
   });
+
 });

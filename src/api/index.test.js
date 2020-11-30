@@ -18,7 +18,7 @@ let mockAxiosResponse = [
   },
 ];
 
-let mockCachedResponse = ['mockCachedResponse'];
+
 
 let expectedProcessedResults = [
   { id: 0, 
@@ -60,5 +60,16 @@ describe('getSearchResults', () => {
   it('should store processed response in localStorage', () => {
     expect(localStorage.setItem.mock.calls.length).toEqual(1);
     expect(localStorage.setItem).toBeCalledWith('@Hom', JSON.stringify(expectedProcessedResults));
+  });
+  
+  it('should return cached response for mention if present', async () => {
+    const mockCachedData = JSON.stringify([{mockCachedKey:'mockCachedValue'}]);
+    localStorage['@Cached'] = mockCachedData;
+    localStorage.getItem.mockReturnValue(mockCachedData);
+
+    const response = await getSearchResults('@Cached');
+    expect(localStorage.getItem.mock.calls.length).toEqual(1);
+    expect(localStorage.getItem).toBeCalledWith('@Cached');
+    expect(response).toEqual([{mockCachedKey:'mockCachedValue'}]);
   });
 });
