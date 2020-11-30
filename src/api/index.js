@@ -25,6 +25,7 @@ export const getSearchResults = async (mention) => {
         username: searchTerm
       }
     });
+    console.log(data);
     return processSearchResults(data);
   } else {
     throw new Error('Not a valid mention.')

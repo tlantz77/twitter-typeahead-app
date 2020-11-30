@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Suggestions = ({searchResults, onSelect}) => {
+const TypeaheadDropdown = ({searchResults, onSelect}) => {
   const renderedUsers = searchResults.map(user => {
     return (
       <div 
@@ -19,9 +19,9 @@ const Suggestions = ({searchResults, onSelect}) => {
 
   return (
     <div className='dropdown-wrapper'>
-       { renderedUsers }
+       { searchResults.length >= 1 ? renderedUsers : 'No users found!'}
     </div>
   )
 }
 
-export default Suggestions;
+export default TypeaheadDropdown;
