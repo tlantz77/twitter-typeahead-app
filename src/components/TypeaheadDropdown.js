@@ -1,6 +1,7 @@
 import React from 'react';
 import verifiedIcon from '../assets/Twitter_Verified_Badge.png';
 
+//hook to track key presses and add event listeners for keyboard navigation
 const useKeyPress = (targetKey) => {
   const [keyPressed, setKeyPressed] = React.useState(false);
 
@@ -29,6 +30,8 @@ const useKeyPress = (targetKey) => {
   return keyPressed;
 };
 
+//render element for a single Twitter user search response with
+//props for selection and keyboard navigation
 const renderItemRow = (item, active, setHovered, onSelect) => {
   return (
     <div 
@@ -47,6 +50,8 @@ const renderItemRow = (item, active, setHovered, onSelect) => {
   )
 }
 
+//Hook to render list of search results with effects to handle keyboard navigation
+//Tracks highlighted or selected results by items array index
 const TypeaheadDropdown = ({items, onSelect}) => {
   const downPress = useKeyPress('ArrowDown');
   const upPress = useKeyPress('ArrowUp');
@@ -55,7 +60,7 @@ const TypeaheadDropdown = ({items, onSelect}) => {
   const [hovered, setHovered] = React.useState(undefined);
 
   React.useEffect(() => {
-    if (items.length && downPress) {
+    if (downPress) {
       setCursor(prevState =>
         prevState < items.length - 1 ? prevState + 1 : prevState
       );
@@ -63,19 +68,19 @@ const TypeaheadDropdown = ({items, onSelect}) => {
   }, [downPress]);
 
   React.useEffect(() => {
-    if (items.length && upPress) {
+    if (upPress) {
       setCursor(prevState => (prevState > 0 ? prevState - 1 : prevState));
     }
   }, [upPress]);
 
   React.useEffect(() => {
-    if (items.length && enterPress) {
+    if (enterPress) {
       onSelect(items[cursor].screenName);
     }
   }, [cursor, enterPress]);
 
   React.useEffect(() => {
-    if (items.length && hovered) {
+    if (hovered) {
       setCursor(items.indexOf(hovered));
     }
   }, [hovered]);

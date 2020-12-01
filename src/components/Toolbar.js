@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Toolbar with submit button and text counter
 const Toolbar = ({textLength}) => {
   let counterColor = textLength > 280 ? 'red' : 'white';
   return ( 

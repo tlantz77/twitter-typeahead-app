@@ -1,11 +1,12 @@
 import React from 'react';
-import { getMentionByCursorPosition } from '../utilities';
 import { getSearchResults } from '../api';
 
 import Toolbar from './Toolbar';
 import TypeaheadDropdown from './TypeaheadDropdown';
 import '../styles.css';
 
+//Modal hook manages state and renders textarea
+//renders and passes props to TypeaheadDropdown and Toolbar
 const Modal = () => {
   const [text, setText] = React.useState('');
   const [debouncedText, setDebouncedText] = React.useState(text);
@@ -14,6 +15,7 @@ const Modal = () => {
   const [selectedMention, setSelectedMention] = React.useState(null);
   const [searchResults, setSearchResults] = React.useState(null);
 
+  //Debounce text input on a half second delay
   React.useEffect(() => {
     const timerId = setTimeout(() => {
       setDebouncedText(text);
@@ -24,7 +26,23 @@ const Modal = () => {
     };
   }, [text]);
 
+  //Check for searchable mention in debounced text using cursor position
+  //and regex pattern and set if found
   React.useEffect(() => {
+    const getMentionByCursorPosition = (text, cursorPosition) => {
+      const mentions = text.match(/@[A-z0-9]{2,}/g);
+      if (mentions) {
+        for (let i = 0; i < mentions.length; i++) {
+          const mentionStartIndex = text.indexOf(mentions[i]);
+          const mentionEndIndex = mentionStartIndex + mentions[i].length;
+          if (cursorPosition > mentionStartIndex && cursorPosition <= mentionEndIndex) {
+            return mentions[i];
+          }
+        }
+      }
+      return null;
+    }
+
     if (debouncedText) {
       const mention = getMentionByCursorPosition(debouncedText, cursorPosition);
       if (mention && mention !== selectedMention) {
@@ -33,8 +51,9 @@ const Modal = () => {
         setMentionToSearch('');
       }
     }
-  }, [debouncedText]);
+  }, [debouncedText, cursorPosition, selectedMention]);
 
+  //Performs api search when searchable mention is updated
   React.useEffect(() => {
     if (mentionToSearch) {
       getSearchResults(mentionToSearch).then(response => {
@@ -45,6 +64,8 @@ const Modal = () => {
     }
   }, [mentionToSearch]);
 
+  //Runs when Tweet button is clicked, will clear relevant pieces of state
+  //and localStorage
   const onFormSubmit = (event) => {
     event.preventDefault();
     if (text.length > 280) {
@@ -58,7 +79,8 @@ const Modal = () => {
     }
   }
   
-  const textInput = () => {
+  //Tweet textarea that keeps track of cursor position
+  const renderTextInput = () => {
     return (
       <textarea
         className='modal text-input'
@@ -74,6 +96,8 @@ const Modal = () => {
     )
   }
 
+  //Function to select mention and updates text to slected mention screenname
+  //Passed as prop to dropdown component
   const selectMention = (screenName) => {
     setSelectedMention(screenName);
     const updatedText = text.replace(mentionToSearch, screenName);
@@ -88,7 +112,7 @@ const Modal = () => {
   return ( 
     <div className='modal wrapper'>
       <form onSubmit={e => onFormSubmit(e)}>
-        {textInput()}
+        {renderTextInput()}
         <Toolbar textLength={text.length}/>
       </form>
       {mentionToSearch && searchResults && renderSearchResults()}
