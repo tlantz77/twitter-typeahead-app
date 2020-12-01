@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles.css';
 
-import Modal from './Modal';
+import Modal from './Compose';
 
 const App = () => {
   return (

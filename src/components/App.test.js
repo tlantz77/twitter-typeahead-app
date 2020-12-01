@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
-import Modal from './Modal';
+import Compose from './Compose';
 
 describe('render', () => {
   let wrapper;
@@ -15,8 +15,8 @@ describe('render', () => {
     expect(component.length).toBe(1);
   });
 
-  it('should render a Modal component', () => {
-    const component = wrapper.find(Modal);
+  it('should render a Compose component', () => {
+    const component = wrapper.find(Compose);
     expect(component.length).toBe(1);
   });
 });

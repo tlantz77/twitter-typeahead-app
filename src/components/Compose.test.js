@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Modal from './Modal';
+import Compose from './Compose';
 import Toolbar from './Toolbar';
 import TypeaheadDropdown from './TypeaheadDropdown';
 
@@ -8,7 +8,7 @@ let component;
 
 let getShallow = () => {
   if (component) return component;
-  component = shallow(<Modal />);
+  component = shallow(<Compose />);
   return component;
 }
 
@@ -18,11 +18,11 @@ beforeEach(() => {
 
 describe('render', () => {
   it('should render without error', () => {
-    expect(getShallow().find('.modal.wrapper').length).toEqual(1);
+    expect(getShallow().find('.compose.wrapper').length).toEqual(1);
   });
 
   it('should render text input', () => {
-    expect(getShallow().find('.modal.text-input').length).toEqual(1);
+    expect(getShallow().find('.compose.text-input').length).toEqual(1);
   });
 
   it('should render a Toolbar and pass textLength prop', () => {

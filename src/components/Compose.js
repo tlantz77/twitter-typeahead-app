@@ -7,7 +7,7 @@ import '../styles.css';
 
 //Modal hook manages state and renders textarea
 //renders and passes props to TypeaheadDropdown and Toolbar
-const Modal = () => {
+const Compose = () => {
   const [text, setText] = React.useState('');
   const [debouncedText, setDebouncedText] = React.useState(text);
   const [cursorPosition, setCursorPosition] = React.useState(0);
@@ -83,7 +83,7 @@ const Modal = () => {
   const renderTextInput = () => {
     return (
       <textarea
-        className='modal text-input'
+        className='compose text-input'
         rows='6'
         cols='60'
         maxLength='280'
@@ -113,7 +113,7 @@ const Modal = () => {
   }
 
   return ( 
-    <div className='modal wrapper'>
+    <div className='compose wrapper'>
       <form onSubmit={e => onFormSubmit(e)}>
         {renderTextInput()}
         <Toolbar textLength={text.length}/>
@@ -123,4 +123,4 @@ const Modal = () => {
   );
 }
 
-export default Modal;
+export default Compose;
