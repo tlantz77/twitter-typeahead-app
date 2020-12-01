@@ -1,31 +1,42 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import Modal from './Modal';
 import Toolbar from './Toolbar';
 import TypeaheadDropdown from './TypeaheadDropdown';
 
-let component, mockSetText, mockSetMentionToSearch;
+let component;
+
+let getShallow = () => {
+  if (component) return component;
+  component = shallow(<Modal />);
+  return component;
+}
+
 beforeEach(() => {
-  component = shallow(<Modal/>);
-  mockSetText = jest.fn();
-  mockSetMentionToSearch = jest.fn();
+  component = null;
 });
 
 describe('render', () => {
   it('should render without error', () => {
-    expect(component.find('.modal.wrapper').length).toEqual(1);
+    expect(getShallow().find('.modal.wrapper').length).toEqual(1);
   });
 
   it('should render text input', () => {
-    expect(component.find('.modal.text-input').length).toEqual(1);
+    expect(getShallow().find('.modal.text-input').length).toEqual(1);
   });
 
-  it('should render a Toolbar', () => {
-    expect(component.find(Toolbar).length).toEqual(1);
+  it('should render a Toolbar and pass textLength prop', () => {
+    let toolbar = getShallow().find(Toolbar);
+    expect(toolbar.length).toEqual(1);
+    expect(toolbar.prop('textLength')).toEqual(0);
   });
 
   it('should not render TypeaheadDropdown if no searchable mention', () => {
-    expect(component.find(TypeaheadDropdown).length).toEqual(0);
+    expect(getShallow().find(TypeaheadDropdown).length).toEqual(0);
   });
 });
+
+//Need more tests (need to read up on testing hooks)!!!
+
+
 
