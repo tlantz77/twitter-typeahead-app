@@ -84,8 +84,9 @@ const Modal = () => {
     return (
       <textarea
         className='modal text-input'
-        rows='8'
-        cols='80'
+        rows='6'
+        cols='60'
+        maxLength='280'
         placeholder="What's happening?"
         value={text}
         onChange={e => {
@@ -106,7 +107,9 @@ const Modal = () => {
   }
 
   const renderSearchResults = () => {
-    return <TypeaheadDropdown items={searchResults} onSelect={selectMention}/>
+    if (searchResults.length > 0) {
+      return <TypeaheadDropdown items={searchResults} onSelect={selectMention}/>
+    }
   }
 
   return ( 

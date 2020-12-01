@@ -30,21 +30,21 @@ describe('render', () => {
 });
 
 describe('text length counter', () => {
-  it('should display a text length number from textLength prop', () => {
-    expect(getShallow().find('.text-counter').text()).toEqual('0');
+  it('should display a max remaining characters when textLength 0', () => {
+    expect(getShallow().find('.text-counter').text()).toEqual('280');
   });
 
-  it('should display text counter in white if below character limit', () => {
-    props = { textLength: 279 };
+  it('should display text counter in white if characters left', () => {
+    props = { textLength: 140 };
     let textCounter = getShallow().find('.text-counter');
-    expect(textCounter.text()).toEqual('279');
+    expect(textCounter.text()).toEqual('140');
     expect(textCounter.prop('style').color).toEqual('white');
   });
 
-  it('should display text counter in white if below character limit', () => {
-    props = { textLength: 281 };
+  it('should display text counter in red if no characters left', () => {
+    props = { textLength: 280 };
     let textCounter = getShallow().find('.text-counter');
-    expect(textCounter.text()).toEqual('281');
+    expect(textCounter.text()).toEqual('0');
     expect(textCounter.prop('style').color).toEqual('red');
   });
 });

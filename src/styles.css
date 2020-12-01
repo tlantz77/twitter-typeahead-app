@@ -13,21 +13,21 @@ body {
 }
 
 .wrapper {
-  width: 700px;
-  height: 400px;
+  width: 650px;
+  height: 350px;
   border-radius: 16px;
   z-index: 0;
 }
 
 .text-input {
-  margin-top: 50px;
+  margin-top: 40px;
   height: 225px;
   border-style: none;
   border-top: solid 1px;
   border-bottom: solid 1px;
   border-color: rgb(14, 73, 110);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 400;
   color: white;
   resize: none;
@@ -65,7 +65,7 @@ body {
 .dropdown-wrapper {
   position: fixed;
   margin-left: 140px;
-  margin-top: -130px;
+  margin-top: -120px;
   height: 400px;
   width: 350px;
   border: solid 1px;

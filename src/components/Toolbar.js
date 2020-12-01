@@ -2,7 +2,8 @@ import React from 'react';
 
 //Toolbar with submit button and text counter
 const Toolbar = ({textLength}) => {
-  let counterColor = textLength > 280 ? 'red' : 'white';
+  let charactersRemaining = 280 - textLength; 
+  let counterColor = charactersRemaining <= 0 ? 'red' : 'white';
   return ( 
     <div className='toolbar'>
       <div className='util-wrapper'>
@@ -10,7 +11,7 @@ const Toolbar = ({textLength}) => {
           className='text-counter' 
           style={{color: counterColor}}
         >
-          {textLength}
+          {charactersRemaining}
         </span>
         <button className='submit-button'>Tweet</button>
       </div>
