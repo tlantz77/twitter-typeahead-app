@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import App from './App';
 import Modal from './Modal';
 
-describe.only('render', () => {
+describe('render', () => {
   let wrapper;
 
   beforeEach(() => {
