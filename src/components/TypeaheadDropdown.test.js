@@ -4,13 +4,13 @@ import TypeaheadDropdown from './TypeaheadDropdown';
 
 const mockResults = [
   {
-    id: 1, name: 'HomerSimpson', screenName: '@Homey', verified: true
+    id: 1, name: 'HomerSimpson', screenName: '@Homey', verified: true, profileImgUrl: 'mockUrl'
   },
   {
-    id: 2, name: 'BartSimpson', screenName: '@ElBarto', verified: false
+    id: 2, name: 'BartSimpson', screenName: '@ElBarto', verified: false, profileImgUrl: 'mockUrl'
   },
   {
-    id: 3, name: 'BarneyGumble', screenName: '@BGDawg', verified: true
+    id: 3, name: 'BarneyGumble', screenName: '@BGDawg', verified: true, profileImgUrl: 'mockUrl'
   }
 ];
 
@@ -24,7 +24,7 @@ let getShallow = () => {
 
 beforeEach(() => {
   component = null;
-  props = { searchResults: mockResults };
+  props = { items: mockResults };
 });
 
 describe('render dropdown', () => {
@@ -32,33 +32,34 @@ describe('render dropdown', () => {
     expect(getShallow().find('.dropdown-wrapper').length).toEqual(1);
   });
 
-  it('should render a user row for each search result', () => {
-    expect(getShallow().find('.user-row').length).toEqual(3);
+  it('should render an item row for each search result', () => {
+    expect(getShallow().find('.item-row').length).toEqual(3);
   });
 });
 
 
-describe('render user row', () => {
-  let userRow;
+describe('render item row', () => {
+  let itemRow;
   beforeEach(() => {
-    userRow = getShallow().find('.user-row').at(0);
+    itemRow = getShallow().find('.item-row').at(0);
   });
 
-  it('should render a user icon', () => {
-    expect(userRow.find('.user-icon').length).toEqual(1);
+  it('should render a item icon', () => {
+    expect(itemRow.find('.item-icon').length).toEqual(1);
   });
 
-  it('should render a user name with check if verified', () => {
-    expect(userRow.find('.user-name').text()).toEqual('HomerSimpson *');
+  it('should render a item name with check if verified', () => {
+    expect(itemRow.find('.item-name').text()).toContain('HomerSimpson');
+    expect(itemRow.find('.verified').length).toEqual(1);
   });
 
-  it('should render a user handle', () => {
-    expect(userRow.find('.user-screen-name').text()).toEqual('@Homey');
+  it('should render a item handle', () => {
+    expect(itemRow.find('.item-screen-name').text()).toEqual('@Homey');
   });
 
-  it('should render a user name with check if verified', () => {
-    userRow = getShallow().find('.user-row').at(1);
-    expect(userRow.find('.user-name').text()).toEqual('BartSimpson');
+  it('should render a item name without check if not verified', () => {
+    itemRow = getShallow().find('.item-row').at(1);
+    expect(itemRow.find('.item-name').text()).toContain('BartSimpson');
+    expect(itemRow.find('.verified').length).toEqual(0);
   });
-
 });

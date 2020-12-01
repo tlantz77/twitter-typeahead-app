@@ -18,8 +18,6 @@ let mockAxiosResponse = [
   },
 ];
 
-
-
 let expectedProcessedResults = [
   { id: 0, 
     name: 'HomerSimpson',
@@ -62,7 +60,7 @@ describe('getSearchResults', () => {
     expect(localStorage.setItem).toBeCalledWith('@Hom', JSON.stringify(expectedProcessedResults));
   });
   
-  it('should return cached response for mention if present', async () => {
+  it('should return cached response for mention if present in localStorage', async () => {
     const mockCachedData = JSON.stringify([{mockCachedKey:'mockCachedValue'}]);
     localStorage['@Cached'] = mockCachedData;
     localStorage.getItem.mockReturnValue(mockCachedData);

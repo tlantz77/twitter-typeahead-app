@@ -17,7 +17,7 @@ const Modal = () => {
   React.useEffect(() => {
     const timerId = setTimeout(() => {
       setDebouncedText(text);
-    }, 1000);
+    }, 500);
 
     return () => {
       clearTimeout(timerId);
@@ -82,7 +82,7 @@ const Modal = () => {
   }
 
   const renderSearchResults = () => {
-    return <TypeaheadDropdown searchResults={searchResults} onSelect={selectMention}/>
+    return <TypeaheadDropdown items={searchResults} onSelect={selectMention}/>
   }
 
   return ( 
