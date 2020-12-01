@@ -51,7 +51,7 @@ const Modal = () => {
         setMentionToSearch('');
       }
     }
-  }, [debouncedText, cursorPosition, selectedMention]);
+  }, [debouncedText, cursorPosition]);
 
   //Performs api search when searchable mention is updated
   React.useEffect(() => {
