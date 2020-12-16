@@ -4,11 +4,12 @@ const app = express();
 const cors = require('cors');
 const PORT = 4000;
 
+//Add keys and secrets here
 const client = new Twitter({
 	consumer_key: 'fx95oKhMHYgytSBmiAqQ',
 	consumer_secret: '0zfaijLMWMYTwVosdqFTL3k58JhRjZNxd2q0i9cltls',
 	access_token_key: '2305278770-GGw8dQQg3o5Vqfx9xHpUgJ0CDUe3BoNmUNeWZBg',
-	access_token_secret: 'iEzxeJjEPnyODVcoDYt5MVvrg90Jx2TOetGdNeol6PeYp',
+	access_token_secret: 'iEzxeJjEPnyODVcoDYt5MVvrg90Jx2TOetGdNeol6PeYp'
 });
 
 // CORS support
