@@ -2,14 +2,15 @@ const Twitter = require('twitter');
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const PORT = 4000;
+
+const keys = require('../config/keys');
 
 //Add keys and secrets here
 const client = new Twitter({
-	consumer_key: '',
-	consumer_secret: '',
-	access_token_key: '',
-	access_token_secret: ''
+	consumer_key: keys.TWITTER_CONSUMER_KEY,
+	consumer_secret: keys.TWITTER_CONSUMER_SECRET,
+	access_token_key: keys.TWITTER_ACCESS_TOKEN_KEY,
+	access_token_secret: keys.TWITTER_ACCESS_TOKEN_SECRET
 });
 
 // CORS support
@@ -33,6 +34,7 @@ app.get('/twitter/user/search', (req, res) => {
 	});
 });
 
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
 	/* eslint-disable no-console */
 	console.log('listening on port ' + PORT + '...');

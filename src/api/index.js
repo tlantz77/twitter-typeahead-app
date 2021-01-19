@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:4000';
-
 //filter raw api response data into objects containing only the data that
 //the app needs
 export const processSearchResults = (data) => {
@@ -25,8 +23,7 @@ export const getSearchResults = async (mention) => {
     return JSON.parse(localStorage.getItem(mention));
   }
   const searchTerm = mention.substring(1);
-  const searchPath = `${BASE_URL}/twitter/user/search`;
-  const { data } = await axios.get(searchPath, {
+  const { data } = await axios.get('/twitter/user/search', {
     params: {
       username: searchTerm
     }

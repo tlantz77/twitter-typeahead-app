@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import verifiedIcon from '../assets/Twitter_Verified_Badge.png';
 
 //hook to track key presses and add event listeners for keyboard navigation
 const useKeyPress = (targetKey) => {
-  const [keyPressed, setKeyPressed] = React.useState(false);
+  const [keyPressed, setKeyPressed] = useState(false);
 
   const downHandler = ({ key }) => {
     if (key === targetKey) {
@@ -17,7 +17,7 @@ const useKeyPress = (targetKey) => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener('keydown', downHandler);
     window.addEventListener('keyup', upHandler);
 
@@ -56,10 +56,10 @@ const TypeaheadDropdown = ({items, onSelect}) => {
   const downPress = useKeyPress('ArrowDown');
   const upPress = useKeyPress('ArrowUp');
   const enterPress = useKeyPress('Enter');
-  const [cursor, setCursor] = React.useState(0);
-  const [hovered, setHovered] = React.useState(undefined);
+  const [cursor, setCursor] = useState(0);
+  const [hovered, setHovered] = useState(undefined);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (downPress) {
       setCursor(prevState =>
         prevState < items.length - 1 ? prevState + 1 : prevState
@@ -67,19 +67,19 @@ const TypeaheadDropdown = ({items, onSelect}) => {
     }
   }, [downPress]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (upPress) {
       setCursor(prevState => (prevState > 0 ? prevState - 1 : prevState));
     }
   }, [upPress]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (enterPress) {
       onSelect(items[cursor].screenName);
     }
   }, [cursor, enterPress]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (hovered) {
       setCursor(items.indexOf(hovered));
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { getSearchResults } from '../api';
 
 import Toolbar from './Toolbar';
@@ -8,15 +8,15 @@ import '../styles.css';
 //Modal hook manages state and renders textarea
 //renders and passes props to TypeaheadDropdown and Toolbar
 const Compose = () => {
-  const [text, setText] = React.useState('');
-  const [debouncedText, setDebouncedText] = React.useState(text);
-  const [cursorPosition, setCursorPosition] = React.useState(0);
-  const [mentionToSearch, setMentionToSearch] = React.useState(null);
-  const [selectedMention, setSelectedMention] = React.useState(null);
-  const [searchResults, setSearchResults] = React.useState(null);
+  const [text, setText] = useState('');
+  const [debouncedText, setDebouncedText] = useState(text);
+  const [cursorPosition, setCursorPosition] = useState(0);
+  const [mentionToSearch, setMentionToSearch] = useState(null);
+  const [selectedMention, setSelectedMention] = useState(null);
+  const [searchResults, setSearchResults] = useState(null);
 
   //Debounce text input on a half second delay
-  React.useEffect(() => {
+  useEffect(() => {
     const timerId = setTimeout(() => {
       setDebouncedText(text);
     }, 500);
@@ -28,7 +28,7 @@ const Compose = () => {
 
   //Check for searchable mention in debounced text using cursor position
   //and regex pattern and set if found
-  React.useEffect(() => {
+  useEffect(() => {
     const getMentionByCursorPosition = (text, cursorPosition) => {
       const mentions = text.match(/@[A-z0-9]{2,}/g);
       if (mentions) {
@@ -54,7 +54,7 @@ const Compose = () => {
   }, [debouncedText, cursorPosition]);
 
   //Performs api search when searchable mention is updated
-  React.useEffect(() => {
+  useEffect(() => {
     if (mentionToSearch) {
       getSearchResults(mentionToSearch).then(response => {
         setSearchResults(response);
