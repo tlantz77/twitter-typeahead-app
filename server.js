@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
-const keys = require('../config/keys');
+const keys = require('./config/keys');
 
 //Add keys and secrets here
 const client = new Twitter({
