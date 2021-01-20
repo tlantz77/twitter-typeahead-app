@@ -27,6 +27,12 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 4000;
 
+app.listen(PORT, () => {
+	/* eslint-disable no-console */
+	console.log('listening on port ' + PORT + '...');
+	/* eslint-enable no-console */
+});
+
 app.get('/', (req, res) => {
 	res.status(200).send({
 		data: 'Successful request',
@@ -45,8 +51,4 @@ app.get('/twitter/user/search', (req, res) => {
 	});
 });
 
-app.listen(PORT, () => {
-	/* eslint-disable no-console */
-	console.log('listening on port ' + PORT + '...');
-	/* eslint-enable no-console */
-});
+
