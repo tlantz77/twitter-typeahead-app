@@ -28,7 +28,6 @@ export const getSearchResults = async (mention) => {
       username: searchTerm
     }
   });
-  console.log("DATA IN GETSEARCHRESULTS:", data)
   const processedSearchResults = processSearchResults(data);
   localStorage.setItem(mention, JSON.stringify(processedSearchResults));
   return processedSearchResults;
