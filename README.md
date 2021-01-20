@@ -7,8 +7,7 @@ Currently running at <https://twitter-typeahead.herokuapp.com/>.
 ## Getting Started
 - To install dependencies run `npm i`
 - To run the web app and api server together, run `npm run dev`
-- To run the web app separately, run `npm run cleint`
-  - This may take a minute or 2 to run
+- To run the web app separately, run `npm run client`
 - To run api server separately, (in another terminal) run `npm run server`
 
 ## Twitter-Screenname-Server API
