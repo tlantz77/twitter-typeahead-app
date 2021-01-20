@@ -14,25 +14,7 @@ const client = new Twitter({
 });
 
 // CORS support
-app.use(cors());
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('build'));
-
-  const path = require('path');
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-  });
-}
-
-const PORT = process.env.PORT || 4000;
-
-app.listen(PORT, () => {
-  /* eslint-disable no-console */
-  console.log(process.env.NODE_ENV);
-	console.log('listening on port ' + PORT + '...');
-	/* eslint-enable no-console */
-});
+// app.use(cors());
 
 app.get('/', (req, res) => {
 	res.status(200).send({
@@ -50,6 +32,24 @@ app.get('/twitter/user/search', (req, res) => {
 			res.status(200).send({ users, response });
 		}
 	});
+});
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'));
+
+  const path = require('path');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  });
+}
+
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => {
+  /* eslint-disable no-console */
+  console.log(process.env.NODE_ENV);
+	console.log('listening on port ' + PORT + '...');
+	/* eslint-enable no-console */
 });
 
 
