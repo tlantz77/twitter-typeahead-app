@@ -16,12 +16,6 @@ const client = new Twitter({
 // CORS support
 app.use(cors());
 
-app.get('/', (req, res) => {
-	res.status(200).send({
-		data: 'Successful request',
-	});
-});
-
 app.get('/twitter/user/search', (req, res) => {
 	const username = req.query.username;
   console.log("USERNAME SEARCH: ", username);
