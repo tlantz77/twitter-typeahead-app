@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
 app.get('/twitter/user/search', (req, res) => {
 	const username = req.query.username;
-
+  console.log("USERNAME SEARCH: ", username);
 	client.get('/users/search', { q: username }, (error, users, response) => {
 		if (error) {
 			res.status(error.code).send({ error });
