@@ -28,7 +28,8 @@ if (process.env.NODE_ENV === 'production') {
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
-	/* eslint-disable no-console */
+  /* eslint-disable no-console */
+  console.log(process.env.NODE_ENV);
 	console.log('listening on port ' + PORT + '...');
 	/* eslint-enable no-console */
 });
