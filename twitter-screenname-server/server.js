@@ -16,6 +16,17 @@ const client = new Twitter({
 // CORS support
 app.use(cors());
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'));
+
+  const path = require('path');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  });
+}
+
+const PORT = process.env.PORT || 4000;
+
 app.get('/', (req, res) => {
 	res.status(200).send({
 		data: 'Successful request',
@@ -34,16 +45,6 @@ app.get('/twitter/user/search', (req, res) => {
 	});
 });
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('build'));
-
-  const path = require('path');
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-  });
-}
-
-const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
 	/* eslint-disable no-console */
 	console.log('listening on port ' + PORT + '...');
